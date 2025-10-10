@@ -1,0 +1,2 @@
+export LOG_LEVEL="INFO"
+python ../hetu_dit/entrypoint/api_server.py --host 127.0.0.1 --port 8000 --adjust_strategy cache --model-class hunyuanvideo --model /Path/to/your/models/HunyuanVideo-diffusers --machine_nums 1  --search-mode multi_machine_efficient_ilp --scheduler-strategy multi_machine_efficient_ilp --stage_level
