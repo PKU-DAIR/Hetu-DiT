@@ -1050,11 +1050,16 @@ class BaseBlockCache(ABC):
                         else []
                     )
                     if not skip_b:
-                        # No P2P: both non-overlapping ends are filled by CPU
-                        if new_bias_tp_start < bias_overlap_start:
-                            cpu_need_b.append((new_bias_tp_start, bias_overlap_start))
-                        if bias_overlap_end < new_bias_tp_end:
-                            cpu_need_b.append((bias_overlap_end, new_bias_tp_end))
+                        # No P2P: fill based on overlap
+                        if bias_overlap_len > 0:
+                            # If there is overlap, fill the gaps around it
+                            if new_bias_tp_start < bias_overlap_start:
+                                cpu_need_b.append((new_bias_tp_start, bias_overlap_start))
+                            if bias_overlap_end < new_bias_tp_end:
+                                cpu_need_b.append((bias_overlap_end, new_bias_tp_end))
+                        else:
+                            # If there is NO overlap, the entire new range needs to be filled from CPU
+                            cpu_need_b.append((new_bias_tp_start, new_bias_tp_end))
 
                     for a, b in cpu_need_b:
                         length = b - a
