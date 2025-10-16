@@ -2329,9 +2329,9 @@ class AsyncServingEngine:
                 .remote(bundle_id, work_dir, bundle_id // 8)
             )
 
-            worker_ip = ray.get(worker.get_node_ip.remote())
-            if worker_ip == driver_ip and self.driver_dummy_worker is None:
-                self.driver_dummy_worker = worker
+            # worker_ip = ray.get(worker.get_node_ip.remote())
+            # if worker_ip == driver_ip and self.driver_dummy_worker is None:
+            #     self.driver_dummy_worker = worker
 
             self.all_workers.append(worker)
 
